@@ -13,7 +13,7 @@ class Program
 
         // Leitura de valores de configuração
         string appName = config["ApplicationName"];
-        string defaultConnection = config.GetSection("ConnectionStrings")["DefaultConnection"];
+        string defaultConnection = config.GetSection("ConnectionStrings")["DefaultConnection"]; //
 
         Console.WriteLine($"Application Name: {appName}");
         Console.WriteLine($"Default Connection: {defaultConnection}");
