@@ -2,6 +2,7 @@
 using Integracoes.ConcreteFactory;
 using Integracoes.Interfaces;
 using Microsoft.Extensions.Configuration;
+using static Integracoes.Interfaces.IIntegracoesSAPFactory;
 
 class Program
 {
@@ -21,24 +22,16 @@ class Program
         Console.WriteLine($"Application Name: {appName}");
         Console.WriteLine($"Default Connection: {defaultConnection}");
 
-        IIntegracoes integracaoAlfa = new IntegracaoPadraoSAP();
-        IntegracaoClient clientAlfa = new IntegracaoClient(integracaoAlfa);
-        Console.WriteLine(clientAlfa.integracaoPadraoSAP.ToString());
+        // Instanciando as fábricas concretas
+        IIntegracoesSAPFactory sapFactory = new IntegracaoPadraoSAP();
+        IIntegracoesFoccoFactory foccoFactory = new IntegracaoPadraoFocco();
+        IIntegracoesTotvsFactory totvsFactory = new IntegracaoPadraoTotovs();
 
-        IIntegracoes integracaoBeta = new IntegracaoPadraoSAP();
-        IntegracaoClient clientBeta = new IntegracaoClient(integracaoBeta);
+        // Criando o cliente de integração e passando o tipo específico para SAP
+        IntegracaoClient client = new IntegracaoClient(sapFactory, foccoFactory, totvsFactory, TipoIntegracaoSAP.Alfa);
 
-        IIntegracoes integracaoGama = new IntegracaoPadraoSAP();
-        IntegracaoClient clientGama = new IntegracaoClient(integracaoGama);
-
-        IIntegracoes integracaoDelta = new IntegracaoPadraoFocco();
-        IIntegracoes integracaoEpsilon = new IntegracaoPadraoFocco();
-        IntegracaoClient clientDelta = new IntegracaoClient(integracaoDelta);
-        IntegracaoClient clientEpsilon = new IntegracaoClient(integracaoEpsilon);
-
-
-        IIntegracoes integracaoZeta = new IntegracaoPadraoTotovs();
-        IntegracaoClient clientZeta = new IntegracaoClient(integracaoZeta);
+        // Executando os processos do cliente
+        client.ExecutarProcessos();
 
 
         Console.ReadKey();

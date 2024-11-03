@@ -1,26 +1,23 @@
-﻿using Integracoes.ConcretesFactory.Totovs;
+﻿using Integracoes.ConcretesFactory.SAP;
+using Integracoes.ConcretesFactory.Totovs;
 using Integracoes.Interfaces;
+using static Integracoes.Interfaces.IIntegracoesSAPFactory;
+using static Integracoes.Interfaces.IIntegracoesTotvsFactory;
 
 namespace Integracoes.ConcreteFactory
 {
     /// <summary>
     /// Concrete Factory
     /// </summary>
-    public class IntegracaoPadraoTotovs : IIntegracoes
+    public class IntegracaoPadraoTotovs : IIntegracoesTotvsFactory
     {
-        public IIntegracaoPadraoFocco CreateIntegracaoPadraoFocco()
+        public IIntegracaoPadraoTotovs CreateIntegracaoPadraoTotovs(TipoIntegracaoTotovs tipo)
         {
-            return null;
-        }
-
-        public IIntegracaoPadraoSAP CreateIntegracaoPadraoSAP()
-        {
-            return null;
-        }
-
-        public IIntegracaoPadraoTotovs CreateIntegracaoPadraoTotovs()
-        {
-            return new IntegracaoParceiroComercialZeta();
+            return tipo switch
+            {
+                TipoIntegracaoTotovs.Zeta => new IntegracaoParceiroComercialZeta(),
+                _ => throw new ArgumentException("Tipo de integração Totovs inválido")
+            };
         }
     }
 }

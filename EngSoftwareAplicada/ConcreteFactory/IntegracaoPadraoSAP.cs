@@ -2,27 +2,24 @@
 using Integracoes.ConcretesFactory.SAP;
 using Integracoes.ConcretesFactory.Totovs;
 using Integracoes.Interfaces;
+using static Integracoes.Interfaces.IIntegracoesSAPFactory;
 
 namespace Integracoes.ConcreteFactory
 {
     /// <summary>
     /// Concrete Factory
     /// </summary>
-    public class IntegracaoPadraoSAP : IIntegracoes
+    public class IntegracaoPadraoSAP : IIntegracoesSAPFactory
     {
-        public IIntegracaoPadraoFocco CreateIntegracaoPadraoFocco()
+        public IIntegracaoPadraoSAP CreateIntegracaoPadraoSAP(TipoIntegracaoSAP tipo)
         {
-            return null;
-        }
-
-        public IIntegracaoPadraoSAP CreateIntegracaoPadraoSAP()
-        {
-            return new IntegracaoParceiroComercialAlfa();
-        }
-
-        public IIntegracaoPadraoTotovs CreateIntegracaoPadraoTotovs()
-        {
-            return null;
+            return tipo switch
+            {
+                TipoIntegracaoSAP.Alfa => new IntegracaoParceiroComercialAlfa(),
+                TipoIntegracaoSAP.Beta => new IntegracaoParceiroComercialBeta(),
+                TipoIntegracaoSAP.Gama => new IntegracaoParceiroComercialGama(),
+                _ => throw new ArgumentException("Tipo de integração SAP inválido")
+            };
         }
     }
 }

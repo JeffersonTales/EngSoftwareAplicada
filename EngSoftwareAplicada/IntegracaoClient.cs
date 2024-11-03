@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Integracoes.Interfaces.IIntegracoesSAPFactory;
 
 namespace Integracoes
 {
@@ -13,18 +14,27 @@ namespace Integracoes
     /// </summary>
     public class IntegracaoClient
     {
-
         public readonly IIntegracaoPadraoSAP integracaoPadraoSAP;
         public readonly IIntegracaoPadraoFocco integracaoPadraoFocco;
         public readonly IIntegracaoPadraoTotovs integracaoPadraoTotovs;
 
-        public IntegracaoClient(IIntegracoes integracoesFactory)
+        public IntegracaoClient(
+            IIntegracoesSAPFactory sapFactory,
+            IIntegracoesFoccoFactory foccoFactory,
+            IIntegracoesTotvsFactory totvsFactory,
+            TipoIntegracaoSAP tipoSAP)  // Parâmetro para escolher o tipo de SAP
         {
-                this.integracaoPadraoSAP = integracoesFactory.CreateIntegracaoPadraoSAP();
-                this.integracaoPadraoFocco = integracoesFactory.CreateIntegracaoPadraoFocco();
-                this.integracaoPadraoTotovs = integracoesFactory.CreateIntegracaoPadraoTotovs();
+            this.integracaoPadraoSAP = sapFactory.CreateIntegracaoPadraoSAP(tipoSAP);
+            //this.integracaoPadraoFocco = foccoFactory.CreateIntegracaoPadraoFocco();
+            //this.integracaoPadraoTotovs = totvsFactory.CreateIntegracaoPadraoTotovs();
         }
 
-
+        public void ExecutarProcessos()
+        {
+            integracaoPadraoSAP.BaixarOrdensProducao();
+            integracaoPadraoFocco.ApontarProducao();
+            integracaoPadraoTotovs.EncerrarProducao();
+        }
     }
+
 }
