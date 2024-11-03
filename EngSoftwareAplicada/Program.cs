@@ -17,18 +17,21 @@ class Program
 
         // Leitura de valores de configuração
         string appName = config["ApplicationName"];
-        string defaultConnection = config.GetSection("ConnectionStrings")["DefaultConnection"]; //
+        string defaultConnection = config.GetSection("ConnectionStrings")["DefaultConnection"];
 
         Console.WriteLine($"Application Name: {appName}");
-        Console.WriteLine($"Default Connection: {defaultConnection}");
+        //Console.WriteLine($"Default Connection: {defaultConnection}");
 
         // Instanciando as fábricas concretas
         IIntegracoesSAPFactory sapFactory = new IntegracaoPadraoSAP();
         IIntegracoesFoccoFactory foccoFactory = new IntegracaoPadraoFocco();
-        IIntegracoesTotvsFactory totvsFactory = new IntegracaoPadraoTotovs();
+        IIntegracoesTotvsFactory totvsFactory = new IntegracaoPadraoTotvs();
 
         // Criando o cliente de integração e passando o tipo específico para SAP
-        IntegracaoClient client = new IntegracaoClient(sapFactory, foccoFactory, totvsFactory, TipoIntegracaoSAP.Alfa);
+        IntegracaoClient client = new IntegracaoClient(sapFactory: sapFactory,
+                                                       foccoFactory: foccoFactory,
+                                                       totvsFactory: totvsFactory,
+                                                       tipoSAP: TipoIntegracaoSAP.Alfa);
 
         // Executando os processos do cliente
         client.ExecutarProcessos();

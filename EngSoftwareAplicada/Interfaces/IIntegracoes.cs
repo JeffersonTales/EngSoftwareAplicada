@@ -35,9 +35,9 @@
     /// </summary>
     public interface IIntegracoesTotvsFactory
     {
-        IIntegracaoPadraoTotovs CreateIntegracaoPadraoTotovs(TipoIntegracaoTotovs tipo);
+        IIntegracaoPadraoTotvs CreateIntegracaoPadraoTotvs(TipoIntegracaoTotvs tipo);
 
-        public enum TipoIntegracaoTotovs
+        public enum TipoIntegracaoTotvs
         {
             Zeta
         }

@@ -11,17 +11,17 @@ namespace Integracoes.ConcretesFactory.SAP
     {
         public void ApontarProducao()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Apontando produção para o Cliente Gama");
         }
 
         public void BaixarOrdensProducao()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Baixando ordens de produção para o Cliente Gama");
         }
 
         public void EncerrarProducao()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Encerrando produção para o Cliente Gama");
         }
     }
 }

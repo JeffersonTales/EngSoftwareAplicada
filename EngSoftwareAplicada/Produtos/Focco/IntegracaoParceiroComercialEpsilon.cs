@@ -9,17 +9,17 @@ namespace Integracoes.ConcretesFactory.Focco
     {
         public void ApontarProducao()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Apontando produção para o Cliente Epsilon");
         }
 
         public void ApontarRefugo()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Apontando refugo para o Cliente Epsilon");
         }
 
         public void BaixarOrdensProducao()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Baixando ordens de produção para o Cliente Epsilon");
         }
     }
 }

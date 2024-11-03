@@ -1,10 +1,7 @@
 ﻿using Integracoes.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static Integracoes.Interfaces.IIntegracoesFoccoFactory;
 using static Integracoes.Interfaces.IIntegracoesSAPFactory;
+using static Integracoes.Interfaces.IIntegracoesTotvsFactory;
 
 namespace Integracoes
 {
@@ -16,24 +13,36 @@ namespace Integracoes
     {
         public readonly IIntegracaoPadraoSAP integracaoPadraoSAP;
         public readonly IIntegracaoPadraoFocco integracaoPadraoFocco;
-        public readonly IIntegracaoPadraoTotovs integracaoPadraoTotovs;
+        public readonly IIntegracaoPadraoTotvs integracaoPadraoTotvs;
 
-        public IntegracaoClient(
-            IIntegracoesSAPFactory sapFactory,
-            IIntegracoesFoccoFactory foccoFactory,
-            IIntegracoesTotvsFactory totvsFactory,
-            TipoIntegracaoSAP tipoSAP)  // Parâmetro para escolher o tipo de SAP
+        public IntegracaoClient(IIntegracoesSAPFactory sapFactory,
+                                IIntegracoesFoccoFactory foccoFactory,
+                                IIntegracoesTotvsFactory totvsFactory,
+                                TipoIntegracaoSAP tipoSAP,
+                                TipoIntegracaoFocco tipoFocco,
+                                TipoIntegracaoTotvs tipoTotvs)
         {
             this.integracaoPadraoSAP = sapFactory.CreateIntegracaoPadraoSAP(tipoSAP);
-            //this.integracaoPadraoFocco = foccoFactory.CreateIntegracaoPadraoFocco();
-            //this.integracaoPadraoTotovs = totvsFactory.CreateIntegracaoPadraoTotovs();
+            //this.integracaoPadraoFocco = foccoFactory.CreateIntegracaoPadraoFocco(tipoFocco);
+            //this.integracaoPadraoTotvs = totvsFactory.CreateIntegracaoPadraoTotvs(tipoTotvs);
         }
+
+        public IntegracaoClient(IIntegracoesSAPFactory sapFactory,
+                                IIntegracoesFoccoFactory foccoFactory,
+                                IIntegracoesTotvsFactory totvsFactory,
+                                TipoIntegracaoSAP tipoSAP)
+        {
+            this.integracaoPadraoSAP = sapFactory.CreateIntegracaoPadraoSAP(tipoSAP);
+            //this.integracaoPadraoFocco = foccoFactory.CreateIntegracaoPadraoFocco(tipoFocco);
+            //this.integracaoPadraoTotvs = totvsFactory.CreateIntegracaoPadraoTotvs(tipoTotvs);
+        }
+
 
         public void ExecutarProcessos()
         {
             integracaoPadraoSAP.BaixarOrdensProducao();
-            integracaoPadraoFocco.ApontarProducao();
-            integracaoPadraoTotovs.EncerrarProducao();
+            integracaoPadraoSAP.ApontarProducao();
+            integracaoPadraoSAP.EncerrarProducao();
         }
     }
 

@@ -3,7 +3,7 @@
     /// <summary>
     /// Abstract Product
     /// </summary>
-    public interface IIntegracaoPadraoTotovs
+    public interface IIntegracaoPadraoTotvs
     {
 
         void BaixarOrdensProducao();

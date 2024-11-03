@@ -1,6 +1,4 @@
-﻿using Integracoes.ConcretesFactory.Focco;
-using Integracoes.ConcretesFactory.SAP;
-using Integracoes.ConcretesFactory.Totovs;
+﻿using Integracoes.ConcretesFactory.SAP;
 using Integracoes.Interfaces;
 using static Integracoes.Interfaces.IIntegracoesSAPFactory;
 
